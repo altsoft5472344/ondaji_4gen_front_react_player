@@ -1,11 +1,11 @@
-import React, { useCallback, useEffect, useRef } from 'react';
-import type { SyntheticEvent } from 'react';
-import type { PlayerEntry } from './players.js';
-import type { ReactPlayerProps } from './types.js';
+import React, { useCallback, useEffect, useRef } from "react";
+import type { SyntheticEvent } from "react";
+import type { PlayerEntry } from "./players.js";
+import type { ReactPlayerProps } from "./types.js";
 
 type Player = React.ForwardRefExoticComponent<
   ReactPlayerProps & {
-    activePlayer: PlayerEntry['player'];
+    activePlayer: PlayerEntry["player"];
   }
 >;
 
@@ -71,10 +71,10 @@ const Player: Player = React.forwardRef((props, ref) => {
   // to the underlying HTML video element, which causes React warnings about unknown
   // event handler properties
   const eventProps: Record<string, EventListenerOrEventListenerObject> = {};
-  const reactPlayerEventHandlers = ['onReady', 'onStart'];
+  const reactPlayerEventHandlers = ["onReady", "onStart"];
 
   for (const key in props) {
-    if (key.startsWith('on') && !reactPlayerEventHandlers.includes(key)) {
+    if (key.startsWith("on") && !reactPlayerEventHandlers.includes(key)) {
       eventProps[key] = props[key as keyof ReactPlayerProps];
     }
   }
@@ -89,13 +89,13 @@ const Player: Player = React.forwardRef((props, ref) => {
         (node: HTMLVideoElement) => {
           playerRef.current = node;
 
-          if (typeof ref === 'function') {
+          if (typeof ref === "function") {
             ref(node);
           } else if (ref !== null) {
             ref.current = node;
           }
         },
-        [ref]
+        [ref],
       )}
       src={props.src}
       crossOrigin={props.crossOrigin}
@@ -107,6 +107,7 @@ const Player: Player = React.forwardRef((props, ref) => {
       playsInline={props.playsInline}
       disableRemotePlayback={props.disableRemotePlayback}
       config={props.config}
+      poster={props.poster}
       onLoadStart={handleLoadStart}
       onPlay={handlePlay}
     >
@@ -115,6 +116,6 @@ const Player: Player = React.forwardRef((props, ref) => {
   );
 });
 
-Player.displayName = 'Player';
+Player.displayName = "Player";
 
 export default Player;
