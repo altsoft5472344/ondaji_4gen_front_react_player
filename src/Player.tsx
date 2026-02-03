@@ -108,7 +108,6 @@ const Player: Player = React.forwardRef((props, ref) => {
       disableRemotePlayback={props.disableRemotePlayback}
       config={props.config}
       poster={props.poster}
-      onError={props.onError}
       onLoadStart={handleLoadStart}
       onPlay={handlePlay}
     >
